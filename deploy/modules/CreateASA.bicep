@@ -13,8 +13,7 @@ param sqlAdminPassword string
 param adlsObj object 
 
 // vars
-//var adlsID = '/subscriptions/${adlsObj.subscriptionId}/resourceGroups/${adlsObj.resourceGroupName}/providers/${adlsObj.resourceId}'
-var adlsID2 = resourceId('Microsoft.Storage/storageAccounts',adlsObj.resourceId)
+var adlsID = '/subscriptions/${adlsObj.subscriptionId}/resourceGroups/${adlsObj.resourceGroupName}/providers/${adlsObj.resourceId}'
 
 resource asa_name_resource 'Microsoft.Synapse/workspaces@2021-06-01' = {
   name: asa_name
@@ -24,7 +23,7 @@ resource asa_name_resource 'Microsoft.Synapse/workspaces@2021-06-01' = {
   }
   properties: {
     defaultDataLakeStorage: {
-      resourceId: adlsID2
+      resourceId: adlsID
       createManagedPrivateEndpoint: false
       accountUrl: 'https://adlsbs.dfs.core.windows.net'
       filesystem: 'asadefault'

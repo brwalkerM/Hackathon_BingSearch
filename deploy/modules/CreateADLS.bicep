@@ -64,51 +64,11 @@ resource adls_name_default 'Microsoft.Storage/storageAccounts/blobServices@2022-
   }
 }
 
-resource Microsoft_Storage_storageAccounts_fileServices_adls_name_default 'Microsoft.Storage/storageAccounts/fileServices@2022-05-01' = {
-  parent: adls_name_resource
-  name: 'default'
-  properties: {
-    protocolSettings: {
-      smb: {
-      }
-    }
-    cors: {
-      corsRules: []
-    }
-    shareDeleteRetentionPolicy: {
-      enabled: false
-      days: 7
-    }
-  }
-}
-
-resource Microsoft_Storage_storageAccounts_queueServices_adls_name_default 'Microsoft.Storage/storageAccounts/queueServices@2022-05-01' = {
-  parent: adls_name_resource
-  name: 'default'
-  properties: {
-    cors: {
-      corsRules: []
-    }
-  }
-}
-
-resource Microsoft_Storage_storageAccounts_tableServices_adls_name_default 'Microsoft.Storage/storageAccounts/tableServices@2022-05-01' = {
-  parent: adls_name_resource
-  name: 'default'
-  properties: {
-    cors: {
-      corsRules: []
-    }
-  }
-}
 
 resource adls_name_default_asadefault 'Microsoft.Storage/storageAccounts/blobServices/containers@2022-05-01' = {
   parent: adls_name_default
   name: 'asadefault'
   properties: {
-    immutableStorageWithVersioning: {
-      enabled: false
-    }
     defaultEncryptionScope: '$account-encryption-key'
     denyEncryptionScopeOverride: false
     publicAccess: 'None'

@@ -1,5 +1,5 @@
 Clear-Host
-Connect-AzAccount -tenant $env:NEW_AZURE_TENANT_ID -Subscription $env:NEW_AZURE_SUBSCRIPTION_ID
+#Connect-AzAccount -tenant $env:NEW_AZURE_TENANT_ID -Subscription $env:NEW_AZURE_SUBSCRIPTION_ID
 
 # Credentials store configs
 $AKVName = 'akv-brwalker-ME'
@@ -20,16 +20,18 @@ $sqlAdmin = 'brwalker'
 
 foreach ($user in $OHUsers)
     {
-        $RGName = 'rg-bsoh-${$user}'
+        $RGName = "rg-bsoh-${user}"
 
         # Create Resource Group for the deployment
-        New-AzResourceGroup -Name $RGName -Location $location
+      #  write-host (Get-Date -format "yyyy-MM-dd HH:mm:ss.fff") "  |Creating Resource Group:       |" $RGName
+      #  New-AzResourceGroup -Name $RGName -Location $location
 
         # Set Deployment Name
         $today = Get-Date -Format 'MM-dd-yyyy-HHmmss'
         $deploymentName = "$RGName-$today"
 
-        Write-host (Get-Date -format "yyyy-MM-dd HH:mm:ss.fff") "  |DeploymentName                 | " $deploymentName
+        Write-host (Get-Date -format "yyyy-MM-dd HH:mm:ss.fff") "  |Starting Deployment:           | " $deploymentName
+        Write-host (Get-Date -format "yyyy-MM-dd HH:mm:ss.fff") "  |in Region:                     | " $location
 
         New-AzSubscriptionDeployment `
         -Name $deploymentName `
@@ -37,7 +39,7 @@ foreach ($user in $OHUsers)
         -RGName $RGName `
         -OHUser $user `
         -location $location `
-        -AdminGroup_objId -$AdminGroup_objId  `
+        -AdminGroup_objId $AdminGroup_objId  `
         -sqlAdmin $sqlAdmin `
         -sqlAdminPassword $sqlAdminPassword
        
