@@ -6,7 +6,7 @@ param tenantId string = subscription().tenantId
 param subId string = subscription().subscriptionId
 param RGName  string 
 param OHUser string 
-param location string 
+param location string
 param AdminGroup_objId string
 param sqlAdmin string
 @secure()

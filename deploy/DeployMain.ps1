@@ -1,6 +1,12 @@
 Clear-Host
 #Connect-AzAccount -tenant $env:NEW_AZURE_TENANT_ID -Subscription $env:NEW_AZURE_SUBSCRIPTION_ID
 
+# User Defined Parameters
+$templateFile = 'Main.bicep'
+$location = 'eastus2'
+$OHUsers = @('user02','user03') # all lower case, no dashes or underscores due to service naming limitations
+$sqlAdmin = 'brwalker'
+
 # Credentials store configs
 $AKVName = 'akv-brwalker-ME'
 $SP_AKV_AdminGroupID = 'AADGlobalAdminGroupID'
@@ -10,13 +16,6 @@ $AdminPWD = 'AdminPWD'
 $APwd = Get-AzKeyVaultSecret -VaultName $AKVName -Name $AdminPWD -AsPlainText
 $sqlAdminPassword = ConvertTo-SecureString $APwd -AsPlainText -Force
 $AdminGroup_objId = Get-AzKeyVaultSecret -VaultName $AKVName -Name $SP_AKV_AdminGroupID -AsPlainText
-
-# User Defined Parameters
-$templateFile = 'Main.bicep'
-$location = 'eastus2'
-$OHUsers = @('user01') # all lower case, no dashes or underscores due to service naming limitations
-$sqlAdmin = 'brwalker'
-
 
 foreach ($user in $OHUsers)
     {
