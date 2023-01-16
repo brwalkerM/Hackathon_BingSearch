@@ -4,7 +4,7 @@ Clear-Host
 # User Defined Parameters
 $templateFile = 'Main.bicep'
 $location = 'eastus2'
-$OHUsers = @('user02','user03') # all lower case, no dashes or underscores due to service naming limitations
+$OHUsers = @('user01') # all lower case, no dashes or underscores due to service naming limitations
 $sqlAdmin = 'brwalker'
 
 # Credentials store configs
